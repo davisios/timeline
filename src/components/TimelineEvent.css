@@ -1,0 +1,21 @@
+.timeline-event {
+  position: absolute;
+  height: 100%;
+  bottom: 0;
+  background-color: #4a90e2;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.resize-button {
+  cursor: ew-resize;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+}
