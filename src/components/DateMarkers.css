@@ -1,0 +1,24 @@
+.date-axis {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.date-marker {
+  padding-bottom: 5px;
+  position: absolute;
+  display: flex;
+  writing-mode: vertical-rl;
+  align-items: flex-end;
+  flex-direction: column;
+  bottom: 0;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: #666;
+  white-space: nowrap;
+  height: 100%;
+  border-right: 1px solid grey;
+}
