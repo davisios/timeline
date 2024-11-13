@@ -1,8 +1,24 @@
+import { useState } from 'react';
+import { useEvents } from './context/EventContext';
+
 const Timeline = () => {
-  
+  const { events } = useEvents();
+  const [scale, setScale] = useState(1);
+
+  const adjustScale = (delta) => {
+    setScale((prevScale) => Math.max(0.5, Math.min(prevScale + delta, 3)));
+  };
   return (
     <div className="timeline-container">
-     test
+      <div className="zoom-controls">
+        <button onClick={() => adjustScale(-0.5)}>-</button>
+        <button onClick={() => adjustScale(0.5)}>+</button>
+      </div>
+      <div className="timeline">
+        {events.map((event, index) => (
+          <span key={index}  >{event.name}</span>
+        ))}
+      </div>
     </div>
   );
 };
