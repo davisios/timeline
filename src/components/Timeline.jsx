@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useEvents } from './context/EventContext';
-
+import { useEvents } from '../context/EventContext';
+import './Timeline.css';
+import DateMarkers from './DateMarkers';
 const Timeline = () => {
   const { events } = useEvents();
   const [scale, setScale] = useState(1);
@@ -14,6 +15,10 @@ const Timeline = () => {
         <button onClick={() => adjustScale(-0.5)}>-</button>
         <button onClick={() => adjustScale(0.5)}>+</button>
       </div>
+
+      <DateMarkers scale={scale} />
+
+
       <div className="timeline">
         {events.map((event, index) => (
           <span key={index}  >{event.name}</span>
