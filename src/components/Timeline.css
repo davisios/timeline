@@ -9,3 +9,12 @@
   margin-bottom: 30px;
 }
 
+.timeline {
+  position: relative;
+}
+
+.timeline-lane {
+  position: relative;
+  height: 45px;
+  margin-bottom: 1rem;
+}
