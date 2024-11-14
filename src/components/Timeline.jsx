@@ -3,6 +3,7 @@ import { useEvents } from '../context/EventContext';
 import './Timeline.css';
 import DateMarkers from './DateMarkers';
 import TimelineEvent from './TimelineEvent';
+
 const Timeline = () => {
   const { events } = useEvents();
   const [scale, setScale] = useState(1);
@@ -20,6 +21,7 @@ const Timeline = () => {
     const endDates = events.map((event) => new Date(event.end));
     return new Date(Math.max(...endDates));
   }, [events]);
+
   const lanes = useMemo(() => {
     const sortedEvents = [...events].sort(
       (a, b) => new Date(a.start) - new Date(b.start)
@@ -41,30 +43,42 @@ const Timeline = () => {
     }, []);
   }, [events]);
   return (
-    <div className="timeline-container">
-      <div className="zoom-controls">
+    <div className='timeline-container'>
+      <div className='zoom-controls'>
         <button onClick={() => adjustScale(-0.5)}>-</button>
         <button onClick={() => adjustScale(0.5)}>+</button>
       </div>
 
       <DateMarkers scale={scale} />
 
-
-      <div className="timeline">
+      <div className='timeline'>
         {lanes.map((lane, laneIndex) => (
-          <div key={laneIndex} className="timeline-lane">
+          <div key={laneIndex} className='timeline-lane'>
             {lane.map((event, eventIndex) => (
               <TimelineEvent
-              onUpdateEvent={() => {}}
-              key={eventIndex}
-              event={event}
-              scale={scale}
-              minDate={minDate}
-              maxDate={maxDate}
-            />
+                key={eventIndex}
+                event={event}
+                scale={scale}
+                minDate={minDate}
+                maxDate={maxDate}
+              />
             ))}
           </div>
         ))}
+      </div>
+
+      <div>
+        <h3>All Events Data</h3>
+        <ul>
+          {events.map((event, index) => (
+            <li key={index}>
+              <div>{event.name}</div>
+              <div>Start: {event.start}</div>
+              <div>End: {event.end}</div>
+              <hr />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
