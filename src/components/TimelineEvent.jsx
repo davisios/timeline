@@ -95,16 +95,18 @@ const TimelineEvent = ({ event, scale, minDate }) => {
         width: `${duration * scale * 16}px`,
       }}
     >
-      <button
-        className='resize-button'
-        onMouseDown={handleResizeLeft}
-      >
+      <button className='resize-button' onMouseDown={handleResizeLeft}>
         <span>||</span>
       </button>
 
       {isEditing ? (
         <input
-          className='timeline-event-input'
+          style={{
+            backgroundColor: 'transparent',
+            width: '100%',
+            height: '100%',
+            border: 'none',
+          }}
           type='text'
           value={name}
           onChange={handleNameChange}
@@ -114,10 +116,7 @@ const TimelineEvent = ({ event, scale, minDate }) => {
       ) : (
         <span style={{ overflow: 'hidden' }}>{name}</span>
       )}
-      <button
-        className='resize-button'
-        onMouseDown={handleResizeRight}
-      >
+      <button className='resize-button' onMouseDown={handleResizeRight}>
         <span>||</span>
       </button>
     </div>
