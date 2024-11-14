@@ -1,9 +1,5 @@
-import { useDroppable } from '@dnd-kit/core';
 import './DateMarkers.css';
 import { useEvents } from '../context/EventContext';
-
-
-
 
 const DateMarkers = ({ scale }) => {
   const { events } = useEvents();
@@ -25,21 +21,18 @@ const DateMarkers = ({ scale }) => {
 
   return (
     <div className="date-axis">
-      {dateMarkersArr.map(({ label, index }) => {
-        const positionPercentage = (index / (numDays - 1)) * 100;
-        return (
-          <div
-            key={index}
-            className="date-marker"
-            style={{ left: `${positionPercentage}%` }}
-          >
-            {label}
-          </div>
-        );
-      })}
+      {dateMarkersArr.map(({ label, index }) => (
+        <div
+          key={index}
+          className="date-marker"
+          style={{ left: `${index * scale}rem` }}
+        >
+          {label}
+        </div>
+      ))}
     </div>
   );
-  
+
 };
 
 export default DateMarkers;

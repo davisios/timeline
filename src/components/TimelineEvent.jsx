@@ -2,20 +2,15 @@ import { useState } from 'react';
 import './TimelineEvent.css';
 import { useEvents } from '../context/EventContext';
 
-const TimelineEvent = ({ event, minDate, maxDate }) => {
+const TimelineEvent = ({ event, scale, minDate }) => {
   const { name, start, end } = event;
   const [isEditing, setIsEditing] = useState(false);
   const { updateEvent } = useEvents();
   const startDate = new Date(start);
   const endDate = new Date(end);
 
-  // Calculate total timeline duration in days
-  const totalTimelineDays = (maxDate - minDate) / (1000 * 60 * 60 * 24);
-  // Calculate event start position and duration as percentages of the total timeline
-  const startOffsetPercentage =
-    ((startDate - minDate) / (1000 * 60 * 60 * 24) / totalTimelineDays) * 100;
-  const eventDurationPercentage =
-    ((endDate - startDate) / (1000 * 60 * 60 * 24) / totalTimelineDays) * 100;
+  const duration = (endDate - startDate) / (1000 * 60 * 60 * 24);
+  const startOffset = (startDate - minDate) / (1000 * 60 * 60 * 24) + 0.3;
 
   const handleNameChange = (e) => {
     updateEvent({
@@ -96,8 +91,8 @@ const TimelineEvent = ({ event, minDate, maxDate }) => {
       onDoubleClick={() => setIsEditing(true)}
       className='timeline-event'
       style={{
-        left: `${startOffsetPercentage}%`,
-        width: `${eventDurationPercentage}%`,
+        left: `${startOffset * scale + 0.1}rem`,
+        width: `${duration * scale * 16}px`,
       }}
     >
       <button
